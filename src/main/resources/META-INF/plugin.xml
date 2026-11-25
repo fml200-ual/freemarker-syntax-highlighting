@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>dev.freemarker.highlight</id>
+    <name>FreeMarker Highlight</name>
+    <vendor>freemarker-highlight</vendor>
+
+    <description><![CDATA[
+    Syntax highlighting for FreeMarker templates in IntelliJ IDEA, for installations where
+    JetBrains' FreeMarker support is not available and <code>.ftl</code> files open as plain text.
+    <br/>
+    Covers template text and HTML, FTL comments (<code>&lt;#-- --&gt;</code>), directives
+    (<code>&lt;#if&gt;</code>, <code>&lt;#list&gt;</code>, <code>&lt;#assign&gt;</code>,
+    <code>&lt;#macro&gt;</code>), macro calls (<code>&lt;@...&gt;</code>), interpolations
+    (<code>${...}</code>, <code>#{...}</code>) with builtins (<code>?upper_case</code>,
+    <code>?size</code>, <code>??</code>), and the square bracket syntax
+    (<code>[#if]</code>, <code>[@macro]</code>, <code>[=expr]</code>, <code>[#-- --]</code>).
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <language id="FREEMARKER_HIGHLIGHT" implementationClass="dev.freemarker.highlight.FreemarkerLanguage"/>
+        <fileType name="FreeMarker (highlight)"
+                  language="FREEMARKER_HIGHLIGHT"
+                  implementationClass="dev.freemarker.highlight.FreemarkerFileType"
+                  fieldName="INSTANCE"
+                  extensions="ftl;ftlh;ftlx"/>
+        <lang.syntaxHighlighterFactory language="FREEMARKER_HIGHLIGHT"
+                                       implementationClass="dev.freemarker.highlight.FreemarkerSyntaxHighlighterFactory"/>
+        <lang.parserDefinition language="FREEMARKER_HIGHLIGHT"
+                               implementationClass="dev.freemarker.highlight.FreemarkerParserDefinition"/>
+        <colorSettingsPage implementation="dev.freemarker.highlight.FreemarkerColorSettingsPage"/>
+    </extensions>
+</idea-plugin>
